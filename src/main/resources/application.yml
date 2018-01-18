@@ -1,0 +1,23 @@
+server:
+  port: 8089
+  context-path: /
+
+spring:
+  datasource:
+    username: root
+    password: 123
+    url: jdbc:mysql://localhost:3306/shadow
+    driver-class-name: com.mysql.jdbc.Driver
+  mvc:
+    view:
+      prefix: /
+      suffix: .jsp
+
+
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
+  type-aliases-package: com.zking.springboot_mtbatis.entity
+
+
+
+

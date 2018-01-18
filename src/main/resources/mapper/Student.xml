@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.zking.springboot_mtbatis.dao.StudentDao">
+    <select id="QueryStudent" resultType="com.zking.springboot_mtbatis.entity.StudentEntity" parameterType="com.zking.springboot_mtbatis.entity.StudentEntity">
+        select * from student
+        <trim prefix="where" prefixOverrides="and">
+            <if test="age!=null">
+                and age=#{age}
+            </if>
+            <if test="sid!=null">
+                and sid=#{sid}
+            </if>
+            <if test="sex!=null and sex!=''">
+                and sex=#{sex}
+            </if>
+            <if test="sname!=null and sname!=''">
+                and sname=#{sname}
+            </if>
+        </trim>
+        ;
+    </select>
+    <delete id="deleteStudent" parameterType="com.zking.springboot_mtbatis.entity.StudentEntity">
+        delete from student where sid=#{sid};
+    </delete>
+    <insert id="addStudent" parameterType="com.zking.springboot_mtbatis.entity.StudentEntity">
+        insert into student(age,sex,sname) VALUES (#{age},#{sex},#{sname});
+    </insert>
+    <update id="updateStudent" parameterType="com.zking.springboot_mtbatis.entity.StudentEntity">
+        update student
+        <trim prefix="set" suffixOverrides=",">
+            <if test="age!=null">
+                age=#{age},
+            </if>
+            <if test="sex!=null and sex!='' ">
+                sex=#{sex},
+            </if>
+            <if test="sname!=null and sname!='' ">
+                sname=#{sname},
+            </if>
+        </trim>
+        where sid=#{sid};
+    </update>
+    <select id="querystudent" parameterType="int" resultType="com.zking.springboot_mtbatis.entity.StudentEntity">
+        select * from student WHERE sid=#{sid};
+    </select>
+</mapper>
